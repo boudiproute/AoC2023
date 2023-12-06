@@ -31,19 +31,16 @@ for line in file:
 
 for seedStart in range(0, int(len(seedsRaw)),2):
     for seed in range(seedsRaw[seedStart],seedsRaw[seedStart]+seedsRaw[seedStart+1]):
-        seedsFull.append(seed)
-
-for seed in seedsFull:
-    currentSeed = seed
-    for fullStep in steps:
-        pathFound = False
-        for path in fullStep:
-            if currentSeed in range(path[0],path[1]) and pathFound == False:
-                pathFound = True
-                currentSeed = currentSeed + path[2]
-    if lowestLocation == 0:
-        lowestLocation = currentSeed
-    elif lowestLocation > currentSeed:
-        lowestLocation = currentSeed
+        currentSeed = seed
+        for fullStep in steps:
+            pathFound = False
+            for path in fullStep:
+                if currentSeed in range(path[0],path[1]) and pathFound == False:
+                    pathFound = True
+                    currentSeed = currentSeed + path[2]
+        if lowestLocation == 0:
+            lowestLocation = currentSeed
+        elif lowestLocation > currentSeed:
+            lowestLocation = currentSeed
 
 print(lowestLocation)
