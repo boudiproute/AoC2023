@@ -10,7 +10,6 @@ inStart, inEnd, outMod
 steps = []
 
 seedsRaw = []
-seedsFull = []
 index = -1
 
 lowestLocation = 0
@@ -29,6 +28,21 @@ for line in file:
         res = re.findall(r"\d+", line)
         steps[index].append([int(res[1]),int(res[1])+int(res[2]),int(res[0])-int(res[1])])
 
+
+
+for seedStart in range(int(len(seedsRaw)/2)):
+    currentSeed = 0
+    for seed in range(seedsRaw[seedStart],seedsRaw[seedStart]+seedsRaw[seedStart+1]):
+        for step in steps:
+            for ranges in step:
+                if seed >= ranges[0] and seed < ranges[1]:
+                    currentSeed += seed + step[ranges][ranges][2]
+                    break
+            currentSeed += seed
+            break
+
+
+'''
 for seedStart in range(0, int(len(seedsRaw)),2):
     for seed in range(seedsRaw[seedStart],seedsRaw[seedStart]+seedsRaw[seedStart+1]):
         currentSeed = seed
@@ -42,5 +56,6 @@ for seedStart in range(0, int(len(seedsRaw)),2):
             lowestLocation = currentSeed
         elif lowestLocation > currentSeed:
             lowestLocation = currentSeed
+'''
 
 print(lowestLocation)
